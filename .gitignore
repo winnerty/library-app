@@ -1,0 +1,88 @@
+# Visual Studio / .NET core common ignores
+
+# Build Folders
+bin/
+obj/
+out/
+
+# Publish output
+publish/
+
+# Visual Studio workspace / user specific
+.vs/
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Rider
+.idea/
+
+# NuGet
+*.nupkg
+packages/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Resharper
+_ReSharper*/
+*.ReSharper*/
+*.DotSettings.user
+
+# Test results
+TestResults/
+*.trx
+*.coverage
+coverage*.json
+*.lcov
+
+# Debug symbols
+*.pdb
+
+# EF Core Migrations (optional)
+# Migrations/ (uncomment to ignore generated migrations folder)
+
+# Local development secrets / settings
+# If you keep secrets in appsettings.Development.json or local.settings.json, consider ignoring them
+appsettings.Development.json
+local.settings.json
+secrets.json
+secrets.*.json
+# Environment files (may contain secrets)
+.env
+.env.*
+
+# Databases
+*.db
+*.db-journal
+*.mdf
+*.ldf
+
+# Logs
+*.log
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Node / front-end
+node_modules/
+wwwroot/lib/
+
+# Temporary files
+*.tmp
+*.temp
+~$*
+
+# JetBrains IDE files
+.idea/
+*.iml
+
+# Misc
+*.cache
+*.bak
+*.swp
+
+# If you want to keep your development appsettings in repo, remove the commented appsettings line above.
