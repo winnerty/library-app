@@ -1,8 +1,8 @@
-﻿using LibraryApp.Attributes;
+using LibraryApp.Attributes;
 
 namespace LibraryApp.Models
 {
-    public class Authors
+    public class Author
     {
         public int Id { get; set; }
 
@@ -11,6 +11,6 @@ namespace LibraryApp.Models
         public int? YearOfBirth { get; set; }
         public string? Email { get; set; }
 
-        public Authors() { }
+        public Author() { }
     }
 }

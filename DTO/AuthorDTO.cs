@@ -1,20 +1,20 @@
-﻿using LibraryApp.Attributes;
+using LibraryApp.Attributes;
 
 namespace LibraryApp.DTO
 {
-
-    public class AuthorsDTO
+    public class AuthorDTO
     {
         public int Id { get; set; }
 
         [Name]
         public string? Name { get; set; }
-        [YearOfBirth]
 
+        [YearOfBirth]
         public int? YearOfBirth { get; set; }
+
         [Email]
         public string? Email { get; set; }
 
-        public AuthorsDTO() { }
+        public AuthorDTO() { }
     }
 }

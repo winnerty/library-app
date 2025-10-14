@@ -19,7 +19,7 @@ namespace LibraryApp
 
             builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<LibraryAppContext>();
 
-            builder.Services.AddScoped<AuthorsService>();
+            builder.Services.AddScoped<AuthorService>();
             
             builder.Services.AddControllers();
             
