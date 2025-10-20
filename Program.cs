@@ -20,6 +20,9 @@ namespace LibraryApp
             builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<LibraryAppContext>();
 
             builder.Services.AddScoped<AuthorService>();
+            builder.Services.AddScoped<BookService>();
+            builder.Services.AddScoped<BorrowerService>();
+            builder.Services.AddScoped<ReservationService>();
             
             builder.Services.AddControllers();
             
@@ -33,6 +36,9 @@ namespace LibraryApp
             }
 
             app.UseHttpsRedirection();
+
+            // Добавляем Exception Middleware
+            app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseAuthorization();
 

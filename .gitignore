@@ -1,23 +1,23 @@
-# Visual Studio / .NET core common ignores
-
-# Build Folders
+# Build artifacts
 bin/
 obj/
 out/
-
-# Publish output
 publish/
 
-# Visual Studio workspace / user specific
+# User-specific files
 .vs/
 .vscode/
-*.suo
 *.user
+*.suo
 *.userosscache
 *.sln.docstates
 
-# Rider
+# Rider / JetBrains
 .idea/
+*.iml
+_ReSharper*/
+*.ReSharper*/
+*.DotSettings.user
 
 # NuGet
 *.nupkg
@@ -26,63 +26,40 @@ project.lock.json
 project.fragment.lock.json
 artifacts/
 
-# Resharper
-_ReSharper*/
-*.ReSharper*/
-*.DotSettings.user
-
-# Test results
 TestResults/
 *.trx
 *.coverage
 coverage*.json
 *.lcov
 
-# Debug symbols
 *.pdb
 
-# EF Core Migrations (optional)
-# Migrations/ (uncomment to ignore generated migrations folder)
-
-# Local development secrets / settings
-# If you keep secrets in appsettings.Development.json or local.settings.json, consider ignoring them
-appsettings.Development.json
-local.settings.json
-secrets.json
-secrets.*.json
-# Environment files (may contain secrets)
-.env
-.env.*
-
-# Databases
 *.db
 *.db-journal
 *.mdf
 *.ldf
+*.sqlite
 
-# Logs
+.env
+.env.*
+
+appsettings.Development.json
+local.settings.json
+secrets.json
+secrets.*.json
+
 *.log
-
-# OS files
-Thumbs.db
-.DS_Store
-
-# Node / front-end
-node_modules/
-wwwroot/lib/
-
-# Temporary files
 *.tmp
 *.temp
 ~$*
-
-# JetBrains IDE files
-.idea/
-*.iml
-
-# Misc
-*.cache
 *.bak
 *.swp
+*.cache
 
-# If you want to keep your development appsettings in repo, remove the commented appsettings line above.
+node_modules/
+wwwroot/lib/
+wwwroot/dist/
+wwwroot/build/
+
+Thumbs.db
+.DS_Store

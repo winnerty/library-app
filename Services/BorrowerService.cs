@@ -17,12 +17,10 @@ namespace LibraryApp.Services
         public async Task<List<BorrowerDTO>> GetAllAsync()
         {
             return await _context.Borrowers
-                .AsNoTracking()
                 .Select(b => new BorrowerDTO
                 {
                     Id = b.Id,
-                    FirstName = b.FirstName,
-                    LastName = b.LastName,
+                    Name = b.Name,
                     Email = b.Email,
                     PhoneNumber = b.PhoneNumber
                 })
@@ -31,51 +29,57 @@ namespace LibraryApp.Services
 
         public async Task<BorrowerDTO?> GetByIdAsync(int id)
         {
-            var borrower = await _context.Borrowers
-                .AsNoTracking()
-                .FirstOrDefaultAsync(b => b.Id == id);
-
+            var borrower = await _context.Borrowers.FindAsync(id);
             if (borrower == null) return null;
 
             return new BorrowerDTO
             {
                 Id = borrower.Id,
-                FirstName = borrower.FirstName,
-                LastName = borrower.LastName,
+                Name = borrower.Name,
                 Email = borrower.Email,
                 PhoneNumber = borrower.PhoneNumber
             };
         }
 
-        public async Task<BorrowerDTO> AddAsync(BorrowerDTO dto)
+        public async Task<BorrowerDTO> AddAsync(BorrowerDTO borrowerDto)
         {
             var borrower = new Borrower
             {
-                FirstName = dto.FirstName,
-                LastName = dto.LastName,
-                Email = dto.Email,
-                PhoneNumber = dto.PhoneNumber
+                Name = borrowerDto.Name,
+                Email = borrowerDto.Email,
+                PhoneNumber = borrowerDto.PhoneNumber
             };
 
             _context.Borrowers.Add(borrower);
             await _context.SaveChangesAsync();
 
-            dto.Id = borrower.Id;
-            return dto;
+            return new BorrowerDTO
+            {
+                Id = borrower.Id,
+                Name = borrower.Name,
+                Email = borrower.Email,
+                PhoneNumber = borrower.PhoneNumber
+            };
         }
 
-        public async Task<BorrowerDTO?> UpdateAsync(int id, BorrowerDTO dto)
+        public async Task<BorrowerDTO?> UpdateAsync(int id, BorrowerDTO borrowerDto)
         {
             var borrower = await _context.Borrowers.FindAsync(id);
             if (borrower == null) return null;
 
-            borrower.FirstName = dto.FirstName;
-            borrower.LastName = dto.LastName;
-            borrower.Email = dto.Email;
-            borrower.PhoneNumber = dto.PhoneNumber;
+            borrower.Name = borrowerDto.Name;
+            borrower.Email = borrowerDto.Email;
+            borrower.PhoneNumber = borrowerDto.PhoneNumber;
 
             await _context.SaveChangesAsync();
-            return dto;
+
+            return new BorrowerDTO
+            {
+                Id = borrower.Id,
+                Name = borrower.Name,
+                Email = borrower.Email,
+                PhoneNumber = borrower.PhoneNumber
+            };
         }
 
         public async Task<bool> DeleteAsync(int id)

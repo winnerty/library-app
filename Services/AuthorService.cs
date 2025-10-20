@@ -2,7 +2,6 @@ using LibraryApp.Data;
 using LibraryApp.DTO;
 using LibraryApp.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore;
 
 namespace LibraryApp.Services
 {
@@ -54,8 +53,13 @@ namespace LibraryApp.Services
             _context.Authors.Add(author);
             await _context.SaveChangesAsync();
 
-            authorDto.Id = author.Id;
-            return authorDto;
+            return new AuthorDTO
+            {
+                Id = author.Id,
+                Name = author.Name,
+                YearOfBirth = author.YearOfBirth,
+                Email = author.Email
+            };
         }
 
         public async Task<bool> UpdateAsync(int id, AuthorDTO authorDto)

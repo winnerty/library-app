@@ -1,4 +1,4 @@
-using LibraryApp.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace LibraryApp.DTO
 {
@@ -6,15 +6,13 @@ namespace LibraryApp.DTO
     {
         public int Id { get; set; }
 
-        [Name]
-        public string? Name { get; set; }
+        [Required, StringLength(30)]
+        public string Name { get; set; } = string.Empty;
 
-        [YearOfBirth]
-        public int? YearOfBirth { get; set; }
+        [Range(1900, 2025)]
+        public int YearOfBirth { get; set; }
 
-        [Email]
-        public string? Email { get; set; }
-
-        public AuthorDTO() { }
+        [EmailAddress]
+        public string Email { get; set; } = string.Empty;
     }
 }

@@ -1,10 +1,6 @@
-using LibraryApp.Attributes;
-using LibraryApp.Data;
 using LibraryApp.Services;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using LibraryApp.DTO;
+using Microsoft.AspNetCore.Mvc;
 
 namespace LibraryApp.Controllers
 {
@@ -20,7 +16,7 @@ namespace LibraryApp.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<AuthorDTO>>> GetAuthors()
+        public async Task<ActionResult<List<AuthorDTO>>> GetAuthors()
         {
             var authors = await _authorService.GetAllAsync();
             return Ok(authors);

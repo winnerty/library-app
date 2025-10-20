@@ -6,19 +6,13 @@ namespace LibraryApp.DTO
     {
         public int Id { get; set; }
 
-        [Required]
-        [StringLength(50)]
-        public string FirstName { get; set; } = null!;
+        [Required, StringLength(30)]
+        public string Name { get; set; } = string.Empty;
 
-        [Required]
-        [StringLength(50)]
-        public string LastName { get; set; } = null!;
-
-        [Required]
         [EmailAddress]
-        public string Email { get; set; } = null!;
+        public string Email { get; set; } = string.Empty;
 
         [Phone]
-        public string? PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; } = string.Empty;
     }
 }
