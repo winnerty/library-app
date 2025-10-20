@@ -37,7 +37,6 @@ namespace LibraryApp
 
             app.UseHttpsRedirection();
 
-            // Добавляем Exception Middleware
             app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseAuthorization();
