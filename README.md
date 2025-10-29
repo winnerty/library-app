@@ -9,9 +9,8 @@ The project was created as a learning example to demonstrate a **full-stack** ar
 ## ⚙️ Technologies Used
 
 ### 🖥️ Backend
-- **C# / ASP.NET Core 8**
-- **Entity Framework Core** — database management
-- **SQL Server** or **SQLite** — data storage
+- **C# / ASP.NET Core 9**
+- **SQL Server** — data storage
 - **REST API** — communication with the frontend
 - **Custom Middleware** for error handling and logging
 
@@ -19,13 +18,11 @@ The project was created as a learning example to demonstrate a **full-stack** ar
 - **React** with **TypeScript**
 - **Vite** — fast development and build tool
 - **React Router** — client-side routing
-- **Tailwind CSS** — modern utility-first styling
 
 ### ☁️ Deployment
 - Hosted on **Microsoft Azure**:
   - Backend — **Azure App Service**
   - Database — **Azure SQL Database**
-  - Frontend — **Azure Static Web Apps**
 
 ---
 
