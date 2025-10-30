@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { createBook } from "../../api/books"
 import React from "react"
+import styles from './BookForm.module.css'
 
 type Props = {
     onClose: () => void
@@ -18,37 +19,74 @@ export default function BookForm({ onClose }: Props) {
     }
 
     return (
-        <div className="bg-white border p-4 rounded mb-4">
-            <h3 className="font-semibold mb-2">Add Book</h3>
-            <form onSubmit={handleSubmit} className="flex flex-col gap-2">
-                <input
-                    placeholder="Title"
-                    value={title}
-                    onChange={e => setTitle(e.target.value)}
-                    className="border p-1 rounded"
-                />
-                <input
-                    placeholder="Author"
-                    value={author}
-                    onChange={e => setAuthor(e.target.value)}
-                    className="border p-1 rounded"
-                />
-                <input
-                    type="number"
-                    placeholder="Year"
-                    value={year}
-                    onChange={e => setYear(Number(e.target.value))}
-                    className="border p-1 rounded"
-                />
-                <div className="flex gap-2 mt-2">
-                    <button className="bg-green-500 text-white px-3 py-1 rounded" type="submit">
-                        Save
-                    </button>
-                    <button className="border px-3 py-1 rounded" onClick={onClose} type="button">
-                        Cancel
+        <div className={styles.overlay}>
+            <div className={styles.modal}>
+                <div className={styles.header}>
+                    <h3 className={styles.title}>Add New Book</h3>
+                    <button 
+                        onClick={onClose}
+                        className={styles.closeButton}
+                    >
+                        <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
                     </button>
                 </div>
-            </form>
+                <form onSubmit={handleSubmit} className={styles.form}>
+                    <div className={styles.formGroup}>
+                        <label className={styles.label}>
+                            Book Title
+                        </label>
+                        <input
+                            placeholder="Enter book title"
+                            value={title}
+                            onChange={e => setTitle(e.target.value)}
+                            className={styles.input}
+                            required
+                        />
+                    </div>
+                    <div className={styles.formGroup}>
+                        <label className={styles.label}>
+                            Author
+                        </label>
+                        <input
+                            placeholder="Enter author name"
+                            value={author}
+                            onChange={e => setAuthor(e.target.value)}
+                            className={styles.input}
+                            required
+                        />
+                    </div>
+                    <div className={styles.formGroup}>
+                        <label className={styles.label}>
+                            Publication Year
+                        </label>
+                        <input
+                            type="number"
+                            placeholder="Enter publication year"
+                            value={year}
+                            onChange={e => setYear(Number(e.target.value))}
+                            className={styles.input}
+                            required
+                        />
+                    </div>
+                    <div className={styles.buttons}>
+                        <button 
+                            type="button" 
+                            onClick={onClose}
+                            className={`${styles.button} ${styles.cancelButton}`}
+                        >
+                            Cancel
+                        </button>
+                        <button 
+                            type="submit"
+                            className={`${styles.button} ${styles.saveButton}`}
+                        >
+                            Save Book
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     )
 }

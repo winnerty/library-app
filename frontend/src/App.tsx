@@ -1,18 +1,17 @@
-
 import { BrowserRouter } from "react-router-dom"
-import Sidebar from "./components/Sidebar"
+import Layout from "./components/Layout"
 import AppRoutes from "./routes/AppRoutes"
 import React from "react"
+import { SearchProvider } from "./context/SearchContext"
 
 export default function App() {
     return (
         <BrowserRouter>
-            <div className="flex">
-                <Sidebar />
-                <div className="flex-1 bg-white">
+            <SearchProvider>
+                <Layout>
                     <AppRoutes />
-                </div>
-            </div>
+                </Layout>
+            </SearchProvider>
         </BrowserRouter>
     )
 }
