@@ -29,7 +29,7 @@ namespace LibraryApp
                 options.AddPolicy("AllowNetlify", policy =>
                 {
                     policy
-                        .WithOrigins("https://library-manager-app.netlify.app/")
+                        .WithOrigins("https://library-manager-app.netlify.app")
                         .AllowAnyHeader()
                         .AllowAnyMethod();
                 });
