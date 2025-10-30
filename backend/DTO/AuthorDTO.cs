@@ -9,7 +9,7 @@ namespace LibraryApp.DTO
         [Required, StringLength(30)]
         public string Name { get; set; } = string.Empty;
 
-        [Range(1900, 2025)]
+        [Range(1600, 2025)]
         public int YearOfBirth { get; set; }
 
         [EmailAddress]

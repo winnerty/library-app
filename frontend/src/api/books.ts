@@ -1,26 +1,60 @@
-export type Book = {
-    id: number
-    title: string
-    author: string
-    year: number
+export interface Book {
+    id: number;
+    title: string;
+    publicationYear: number;
+    authorId: number;
+    authorName: string;
 }
 
-let books: Book[] = [
-    { id: 1, title: "The Hobbit", author: "J.R.R. Tolkien", year: 1937 },
-    { id: 2, title: "1984", author: "George Orwell", year: 1949 },
-]
+export interface CreateBookDTO {
+    title: string;
+    publicationYear: number;
+    authorId: number;
+}
+
+import { API_BASE_URL } from './config';
 
 export async function getBooks(): Promise<Book[]> {
-    return Promise.resolve(books)
+    const response = await fetch(`${API_BASE_URL}/book`);
+    if (!response.ok) {
+        throw new Error('Failed to fetch books');
+    }
+    return response.json();
 }
 
-export async function createBook(book: Omit<Book, "id">): Promise<Book> {
-    const newBook = { ...book, id: Date.now() }
-    books.push(newBook)
-    return Promise.resolve(newBook)
+export async function createBook(book: CreateBookDTO): Promise<Book> {
+    const response = await fetch(`${API_BASE_URL}/book`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(book),
+    });
+    if (!response.ok) {
+        throw new Error('Failed to create book');
+    }
+    return response.json();
+}
+
+export async function updateBook(id: number, book: CreateBookDTO): Promise<Book> {
+    const response = await fetch(`${API_BASE_URL}/book/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(book),
+    });
+    if (!response.ok) {
+        throw new Error('Failed to update book');
+    }
+    return response.json();
 }
 
 export async function deleteBook(id: number): Promise<void> {
-    books = books.filter(b => b.id !== id)
-    return Promise.resolve()
+    const response = await fetch(`${API_BASE_URL}/book/${id}`, {
+        method: 'DELETE',
+    });
+    if (!response.ok) {
+        throw new Error('Failed to delete book');
+    }
 }

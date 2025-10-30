@@ -24,6 +24,19 @@ namespace LibraryApp
             builder.Services.AddScoped<BorrowerService>();
             builder.Services.AddScoped<ReservationService>();
             
+            builder.Services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                    policy =>
+                    {
+                        policy.WithOrigins(
+                            "http://localhost:5173",
+                        )
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                    });
+            });
+
             builder.Services.AddControllers();
             
             builder.Services.AddOpenApi();
@@ -38,6 +51,8 @@ namespace LibraryApp
             app.UseHttpsRedirection();
 
             app.UseMiddleware<ExceptionMiddleware>();
+
+            app.UseCors();
 
             app.UseAuthorization();
 

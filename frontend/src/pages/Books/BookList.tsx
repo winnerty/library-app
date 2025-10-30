@@ -7,6 +7,7 @@ import { useSearch } from "../../context/SearchContext"
 export default function BookList() {
     const [books, setBooks] = useState<Book[]>([])
     const [showForm, setShowForm] = useState(false)
+    const [editingBook, setEditingBook] = useState<Book | null>(null)
     const { searchQuery } = useSearch()
 
     const filteredBooks = useMemo(() => {
@@ -15,8 +16,22 @@ export default function BookList() {
         )
     }, [books, searchQuery])
 
+    const [isLoading, setIsLoading] = useState(true)
+    const [error, setError] = useState<string | null>(null)
+
     useEffect(() => {
-        getBooks().then(setBooks)
+        setIsLoading(true)
+        setError(null)
+        getBooks()
+            .then(books => {
+                console.log('Received books:', books)
+                setBooks(books)
+            })
+            .catch(err => {
+                console.error('Error fetching books:', err)
+                setError(err.message)
+            })
+            .finally(() => setIsLoading(false))
     }, [])
 
     const handleDelete = async (id: number) => {
@@ -36,30 +51,50 @@ export default function BookList() {
                 </button>
             </div>
 
-            {showForm && (
+            {(showForm || editingBook) && (
                 <BookForm
-                    onClose={async () => {
+                    book={editingBook ?? undefined}
+                    onClose={() => {
                         setShowForm(false);
-                        setBooks(await getBooks());
+                        setEditingBook(null);
+                        getBooks().then(setBooks);
                     }}
                 />
             )}
 
+            {isLoading && (
+                <div className="text-center text-gray-600">Loading books...</div>
+            )}
+            {error && (
+                <div className="text-center text-red-600">
+                    Error loading books: {error}
+                </div>
+            )}
+            {!isLoading && !error && filteredBooks.length === 0 && (
+                <div className="text-center text-gray-600">
+                    No books found. Try adding some!
+                </div>
+            )}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredBooks.map((book) => (
                     <div key={book.id} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                        <div className="h-48 bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center">
-                            <span className="text-6xl">📚</span>
-                        </div>
+                        <img
+                            src="book-cover.jpg"
+                            alt="Book cover"
+                            className="h-48 w-full object-cover"
+                        />
                         <div className="p-6">
                             <h3 className="text-xl font-semibold text-gray-800 mb-2">{book.title}</h3>
                             <div className="text-gray-600">
-                                <p className="mb-1">by {book.author}</p>
-                                <p className="text-sm">Published: {book.year}</p>
+                                <p className="mb-1">by {book.authorName}</p>
+                                <p className="text-sm">Published: {book.publicationYear}</p>
                             </div>
                             <div className="mt-4 flex gap-2">
-                                <button className="flex-1 bg-blue-50 text-blue-600 px-4 py-2 rounded-lg hover:bg-blue-100 transition-colors">
-                                    Borrow
+                                <button 
+                                    onClick={() => setEditingBook(book)}
+                                    className="flex-1 bg-blue-50 text-blue-600 px-4 py-2 rounded-lg hover:bg-blue-100 transition-colors"
+                                >
+                                    Edit
                                 </button>
                                 <button
                                     onClick={() => handleDelete(book.id)}
