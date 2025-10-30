@@ -29,17 +29,21 @@ namespace LibraryApp
                 options.AddPolicy("AllowNetlify", policy =>
                 {
                     policy
-                        .WithOrigins("https://library-manager-app.netlify.app")
+                        .WithOrigins(
+                            "https://library-manager-app.netlify.app",
+                            "http://localhost:5173"
+                        )
                         .AllowAnyHeader()
                         .AllowAnyMethod();
                 });
             });
 
             builder.Services.AddControllers();
-            
             builder.Services.AddOpenApi();
 
             var app = builder.Build();
+
+            app.UseCors("AllowNetlify");
 
             if (app.Environment.IsDevelopment())
             {
@@ -47,15 +51,9 @@ namespace LibraryApp
             }
 
             app.UseHttpsRedirection();
-
-            app.UseMiddleware<ExceptionMiddleware>();
-
-            app.UseCors("AllowNetlify");
-
             app.UseAuthorization();
 
             app.MapControllers();
-
             app.Run();
         }
     }
