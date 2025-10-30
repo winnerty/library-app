@@ -3,7 +3,7 @@ export interface Author {
     name: string;
 }
 
-const API_BASE_URL = 'http://localhost:5102/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL;
 
 export async function getAuthors(): Promise<Author[]> {
     const response = await fetch(`${API_BASE_URL}/author`);

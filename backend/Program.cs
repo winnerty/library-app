@@ -26,15 +26,13 @@ namespace LibraryApp
             
             builder.Services.AddCors(options =>
             {
-                options.AddDefaultPolicy(
-                    policy =>
-                    {
-                        policy.WithOrigins(
-                            "http://localhost:5173"
-                        )
+                options.AddPolicy("AllowNetlify", policy =>
+                {
+                    policy
+                        .WithOrigins("https://library-manager-app.netlify.app/")
                         .AllowAnyHeader()
                         .AllowAnyMethod();
-                    });
+                });
             });
 
             builder.Services.AddControllers();
@@ -52,7 +50,7 @@ namespace LibraryApp
 
             app.UseMiddleware<ExceptionMiddleware>();
 
-            app.UseCors();
+            app.UseCors("AllowNetlify");
 
             app.UseAuthorization();
 
