@@ -42,7 +42,7 @@ namespace LibraryApp.Controllers
         {
             var result = await _borrowerService.UpdateAsync(id, borrowerDto);
             if (result == null) return NotFound();
-            return NoContent();
+            return Ok(result);
         }
 
         [HttpDelete("{id}")]

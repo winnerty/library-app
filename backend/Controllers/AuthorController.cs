@@ -42,7 +42,7 @@ namespace LibraryApp.Controllers
         {
             var result = await _authorService.UpdateAsync(id, authorDto);
             if (!result) return NotFound();
-            return NoContent();
+            return Ok(result);
         }
 
         [HttpDelete("{id}")]
