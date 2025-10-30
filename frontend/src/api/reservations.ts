@@ -16,7 +16,7 @@ export interface CreateReservationDTO {
   bookId: number;
 }
 
-const API_BASE_URL = import.meta.env.VITE_API_URL;
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5102/api";
 
 export async function getReservations(): Promise<Reservation[]> {
   const res = await fetch(`${API_BASE_URL}/reservation`);

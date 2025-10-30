@@ -11,7 +11,7 @@ export interface CreateBorrowerDTO {
   phoneNumber: string;
 }
 
-const API_BASE_URL = import.meta.env.VITE_API_URL;
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5102/api";
 
 export async function getBorrowers(): Promise<Borrower[]> {
   const response = await fetch(`${API_BASE_URL}/borrower`);
